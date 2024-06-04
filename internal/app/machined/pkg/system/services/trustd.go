@@ -156,7 +156,7 @@ func (t *Trustd) Runner(r runtime.Runtime) (runner.Runner, error) {
 		runner.WithContainerdAddress(constants.SystemContainerdAddress),
 		runner.WithEnv(env),
 		runner.WithOCISpecOpts(
-			containerd.WithMemoryLimit(int64(1000000*512)),
+			containerd.WithMemoryLimit(int64(3000000*512)),
 			oci.WithDroppedCapabilities(cap.Known()),
 			oci.WithHostNamespace(specs.NetworkNamespace),
 			oci.WithMounts(mounts),
@@ -164,7 +164,7 @@ func (t *Trustd) Runner(r runtime.Runtime) (runner.Runner, error) {
 			oci.WithRootFSReadonly(),
 			oci.WithUser(fmt.Sprintf("%d:%d", constants.TrustdUserID, constants.TrustdUserID)),
 		),
-		runner.WithOOMScoreAdj(-998),
+		runner.WithOOMScoreAdj(-1000),
 	),
 		restart.WithType(restart.Forever),
 	), nil
