@@ -56,9 +56,12 @@ func (ctrl *ExtensionServiceConfigFilesController) Outputs() []controller.Output
 //
 //nolint:gocyclo
 func (ctrl *ExtensionServiceConfigFilesController) Run(ctx context.Context, r controller.Runtime, logger *zap.Logger) error {
-	if ctrl.V1Alpha1Mode == v1alpha1runtime.ModeContainer {
-		return nil
-	}
+	// Do not bail in a container. Needed to make the STEC use case work
+	/*
+		if ctrl.V1Alpha1Mode == v1alpha1runtime.ModeContainer {
+			return nil
+		}
+	*/
 
 	for {
 		select {
