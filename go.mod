@@ -1,4 +1,4 @@
-module github.com/siderolabs/talos
+module github.com/mattiascockburn/talos
 
 go 1.23.3
 
@@ -11,6 +11,7 @@ replace (
 
 	// see https://github.com/mdlayher/kobject/pull/5
 	github.com/mdlayher/kobject => github.com/smira/kobject v0.0.0-20240304111826-49c8d4613389
+	github.com/siderolabs/talos => github.com/mattiascockburn/talos v0.0.0-20241120131522-e8160320f590
 
 	// Use nested module.
 	github.com/siderolabs/talos/pkg/machinery => ./pkg/machinery
@@ -193,6 +194,8 @@ require (
 	sigs.k8s.io/hydrophone v0.6.1-0.20240718103601-b92baf7e0b04
 	sigs.k8s.io/yaml v1.4.0
 )
+
+require github.com/siderolabs/talos v0.0.0-00010101000000-000000000000
 
 require (
 	cel.dev/expr v0.18.0 // indirect
