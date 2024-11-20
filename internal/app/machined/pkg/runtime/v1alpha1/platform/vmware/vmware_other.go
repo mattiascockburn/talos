@@ -14,6 +14,7 @@ import (
 	"github.com/siderolabs/go-procfs/procfs"
 
 	"github.com/siderolabs/talos/internal/app/machined/pkg/runtime"
+	"github.com/siderolabs/talos/pkg/machinery/constants"
 )
 
 // VMware is the concrete type that implements the platform.Platform interface.
@@ -36,7 +37,12 @@ func (v *VMware) Mode() runtime.Mode {
 
 // KernelArgs implements the runtime.Platform interface.
 func (v *VMware) KernelArgs(string) procfs.Parameters {
-	return []*procfs.Parameter{}
+	return []*procfs.Parameter{
+		procfs.NewParameter(constants.KernelParamConfig).Append(constants.ConfigGuestInfo),
+		procfs.NewParameter("console").Append("tty0").Append("ttyS0"),
+		procfs.NewParameter("earlyprintk").Append("ttyS0,115200"),
+		procfs.NewParameter(constants.KernelParamNetIfnames).Append("0"),
+	}
 }
 
 // NetworkConfiguration implements the runtime.Platform interface.
